@@ -3,6 +3,11 @@ angular.module('app.users', [])
 
     $scope.user = {};
     $scope.userList = [];
+    $scope.alert = {
+      show: false,
+      type: '',
+      msg: ''
+    };
 
     $scope.dateOptions = {
       formatYear: 'yyyy',
@@ -20,13 +25,13 @@ angular.module('app.users', [])
 
     $scope.getUsers = function() {
       ApiRequests.getUsers()
-      .then(function(res) {
-        console.log(res);
-        $scope.userList = res.data;
-      })
-      .catch(function(err){
-        console.log('err', err);
-      });
+        .then(function(res) {
+          console.log(res);
+          $scope.userList = res.data;
+        })
+        .catch(function(err) {
+          console.log('err', err);
+        });
     }
     $scope.dateChange = function(date) {
       $scope.user.birthDate = date;
@@ -37,10 +42,27 @@ angular.module('app.users', [])
       ApiRequests.saveUser(data)
         .then(function(res) {
           console.log('res', res);
+          $scope.alert = {
+            show: true,
+            type: 'success',
+            msg: 'User successfully created'
+          };
+          $scope.userList.push(res.data);
           $scope.user = {};
+          setTimeout(function() {
+            $scope.alert = {};
+          }, 2000);
         })
         .catch(function(err) {
           console.log('err', err);
+          $scope.alert = {
+            show: true,
+            type: 'danger',
+            msg: err.message
+          };
+          setTimeout(function() {
+            $scope.alert = {};
+          }, 2000);
         });
     }
   }]);
