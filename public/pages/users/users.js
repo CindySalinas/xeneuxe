@@ -165,6 +165,8 @@ angular.module('app.users', [])
       $scope.user = {};
       $scope.dt = '';
       $scope.edit = false;
+      $scope.userForm.$setPristine();
+      $scope.userForm.$setUntouched();
     }
   }])
 
