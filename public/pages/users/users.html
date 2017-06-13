@@ -7,7 +7,7 @@
         <div class="form-group" ng-class="{ 'has-error' : userForm.accountNumber.$invalid && !userForm.accountNumber.$pristine }">
           <label for="inputEmail3" class="col-sm-4 control-label">Account Number</label>
           <div class="col-sm-8">
-            <input type="text" name="accountNumber" class="form-control" id="inputAccountNumber" placeholder="Account Number" ng-model="user.accountNumber" required>
+            <input type="number" name="accountNumber" class="form-control" id="inputAccountNumber" placeholder="Account Number" ng-model="user.accountNumber" required>
             <p ng-show="userForm.accountNumber.$invalid && !userForm.accountNumber.$pristine" class="help-block">
                Your account number is requried
             </p>
