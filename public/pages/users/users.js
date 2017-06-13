@@ -1,5 +1,5 @@
 angular.module('app.users', [])
-  .controller('UsersCtrl', ['$scope', 'ApiRequests', function($scope, ApiRequests) {
+  .controller('UsersCtrl', ['$scope', 'ApiRequests', '$uibModal', function($scope, ApiRequests, $uibModal) {
 
     $scope.user = {};
     $scope.userList = [];
@@ -27,11 +27,9 @@ angular.module('app.users', [])
     $scope.getUsers = function() {
       ApiRequests.getUsers()
         .then(function(res) {
-          console.log(res);
           $scope.userList = res.data;
         })
         .catch(function(err) {
-          console.log('err', err);
         });
     }
     $scope.dateChange = function(date) {
@@ -43,7 +41,6 @@ angular.module('app.users', [])
       if($scope.edit){
         ApiRequests.updateUser(data)
           .then(function(res) {
-            console.log('res', res);
             $scope.alert = {
               show: true,
               type: 'success',
@@ -75,7 +72,6 @@ angular.module('app.users', [])
       else{
         ApiRequests.saveUser(data)
           .then(function(res) {
-            console.log('res', res);
             $scope.alert = {
               show: true,
               type: 'success',
@@ -83,6 +79,7 @@ angular.module('app.users', [])
             };
             $scope.userList.push(res.data);
             $scope.user = {};
+            $scope.dt = '';
             setTimeout(function() {
               $scope.alert = {};
             }, 2000);
@@ -111,11 +108,67 @@ angular.module('app.users', [])
         $scope.dt = '';
     }
     $scope.deleteUser = function(data, index){
+      var modalInstance = $uibModal.open({
+        templateUrl: 'templates/users/users-delete.html',
+        controller: 'userDeleteController',
+        size: 'md',
+        resolve: {
+          Items: function(){
+            return data;
+          }
+        }
+      });
+      modalInstance.result.then(function (result) {
+        ApiRequests.deleteUser(data._id)
+          .then(function(res) {
+            angular.forEach($scope.userList, function(value, index){
+              if(data._id === value._id){
+                $scope.userList.splice(index,1);
+              }
+            });
+            var modalInstance2 = $uibModal.open({
+              templateUrl: 'templates/users/users-success.html',
+              controller: 'userDeleteController',
+              size: 'md',
+              resolve: {
+                Items: function(){
+                  return {};
+                }
+              }
+            });
+            modalInstance2.result.then(function (result) {}, function () {});
+          })
+          .catch(function(err) {
+            var modalInstance2 = $uibModal.open({
+              templateUrl: 'templates/users/users-error.html',
+              controller: 'userDeleteController',
+              size: 'md',
+              resolve: {
+                Items: function(){
+                  return {};
+                }
+              }
+            });
+            modalInstance2.result.then(function (result) {}, function () {});
+          });
+      }, function () {
 
+      });
     }
     $scope.cancel = function(){
       $scope.user = {};
       $scope.dt = '';
       $scope.edit = false;
     }
-  }]);
+  }])
+
+  .controller('userDeleteController', ['$scope','$uibModalInstance','Items', function($scope, $uibModalInstance,Items){
+    $scope.items = Items;
+    $scope.save = function (){
+      $uibModalInstance.close($scope.items);
+    };
+
+    $scope.cancel = function (){
+      $uibModalInstance.dismiss('cancel');
+    };
+}]);

@@ -20,6 +20,15 @@ angular.module('app.services', [])
       return defer.promise;
     }
 
+    function deleteUser(user) {
+      var url = baseUrl + 'users/' + user;
+      var defer = $q.defer();
+      $http.delete(url)
+        .then(function(res) { defer.resolve(res.data) })
+        .catch(function(err) { defer.reject(err.data) });
+      return defer.promise;
+    }
+
     function saveUser(data) {
       var url = baseUrl + 'users';
       var defer = $q.defer();
@@ -32,6 +41,7 @@ angular.module('app.services', [])
     return {
       getUsers: getUsers,
       saveUser: saveUser,
-      updateUser: updateUser
+      updateUser: updateUser,
+      deleteUser: deleteUser
     };
   }]);
