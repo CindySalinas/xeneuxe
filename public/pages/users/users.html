@@ -1,5 +1,5 @@
 <div class="users-form-container" ng-init="getUsers()">
-  <form name="userForm" class="form-horizontal" ng-submit="createUser(user)" novalidate>
+  <form name="userForm" class="form-horizontal form-user" ng-submit="createUser(user)" novalidate>
     <h3>User Information</h3>
     <div class="row">
       <div ng-if="alert.show" uib-alert  ng-class="'alert-' + (alert.type || 'warning')">{{alert.msg}}</div>
@@ -8,19 +8,19 @@
           <label for="inputEmail3" class="col-sm-4 control-label">Account Number</label>
           <div class="col-sm-8">
             <input type="text" name="accountNumber" class="form-control" id="inputAccountNumber" placeholder="Account Number" ng-model="user.accountNumber" required>
+            <p ng-show="userForm.accountNumber.$invalid && !userForm.accountNumber.$pristine" class="help-block">
+               Your account number is requried
+            </p>
           </div>
-          <p ng-show="userForm.accountNumber.$invalid && !userForm.accountNumber.$pristine" class="help-block">
-             Your account number is requried
-          </p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : userForm.lastName.$invalid && !userForm.lastName.$pristine }">
           <label for="inputEmail3" class="col-sm-4 control-label">Last Name</label>
           <div class="col-sm-8">
             <input type="text" name="lastName" class="form-control" id="inputLastName" placeholder="Last Name" ng-model="user.lastName"  required>
+            <p ng-show="userForm.lastName.$invalid && !userForm.lastName.$pristine" class="help-block">
+               Your last name is requried
+            </p>
           </div>
-          <p ng-show="userForm.lastName.$invalid && !userForm.lastName.$pristine" class="help-block">
-             Your last name is requried
-          </p>
         </div>
       </div>
       <div class="col-md-6">
@@ -28,11 +28,12 @@
           <label for="inputPassword3" class="col-sm-4 control-label">First Name</label>
           <div class="col-sm-8">
             <input type="text" name="firstName" class="form-control" id="inputFirstName" placeholder="First Name" ng-model="user.firstName" required>
+            <p ng-show="userForm.firstName.$invalid && !userForm.firstName.$pristine" class="help-block">
+               Your first name is requried
+            </p>
           </div>
-          <p ng-show="userForm.firstName.$invalid && !userForm.firstName.$pristine" class="help-block">
-             Your first name is requried
-          </p>
         </div>
+        <div class="clearfix"></div>
         <div class="form-group" ng-class="{ 'has-error' : userForm.birthDate.$invalid && !userForm.birthDate.$pristine }">
           <label for="inputPassword3" class="col-sm-4 control-label">Date of Birth</label>
           <div class="col-sm-8">
@@ -42,10 +43,10 @@
                 <button type="button" class="btn btn-default" ng-click="open2()"><i class="fa fa-calendar" aria-hidden="true"></i></button>
               </span>
             </div>
+            <p ng-show="userForm.birthDate.$invalid && !userForm.birthDate.$pristine" class="help-block">
+               Your date of birth is requried
+            </p>
           </div>
-          <p ng-show="userForm.birthDate.$invalid && !userForm.birthDate.$pristine" class="help-block">
-             Your date of birth is requried
-          </p>
         </div>
       </div>
       <div class="col-md-6">
@@ -53,10 +54,10 @@
           <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
           <div class="col-sm-8">
             <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email"  ng-model="user.email"  required>
+            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">
+               Your email is requried
+            </p>
           </div>
-          <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">
-             Your email is requried
-          </p>
         </div>
         <div class="form-group" ng-class="{ 'has-error' : userForm.membershipType.$invalid && !userForm.membershipType.$pristine }">
           <label for="inputEmail3" class="col-sm-4 control-label">Membership type</label>
@@ -66,10 +67,10 @@
               <option value="silver">Silver</option>
               <option value="gold">Gold</option>
             </select>
+            <p ng-show="userForm.membershipType.$invalid && !userForm.membershipType.$pristine" class="help-block">
+              Membership type is requried
+            </p>
           </div>
-          <p ng-show="userForm.membershipType.$invalid && !userForm.membershipType.$pristine" class="help-block">
-            Membership type is requried
-          </p>
         </div>
       </div>
       <div class="col-md-6">
@@ -77,10 +78,10 @@
           <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
           <div class="col-sm-8">
             <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="user.password"  required>
-          </div>
             <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block">
-            Password is requried
-          </p>
+              Password is requried
+            </p>
+          </div>
         </div>
       </div>
       <div class="col-md-12">

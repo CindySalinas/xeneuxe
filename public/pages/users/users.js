@@ -53,6 +53,9 @@ angular.module('app.users', [])
             });
             $scope.user = {};
             $scope.dt = '';
+            $scope.edit = false;
+            $scope.userForm.$setPristine();
+            $scope.userForm.$setUntouched();
             setTimeout(function() {
               $scope.alert = {};
             }, 2000);
@@ -80,6 +83,9 @@ angular.module('app.users', [])
             $scope.userList.push(res.data);
             $scope.user = {};
             $scope.dt = '';
+            $scope.edit = false;
+            $scope.userForm.$setPristine();
+            $scope.userForm.$setUntouched();
             setTimeout(function() {
               $scope.alert = {};
             }, 2000);
