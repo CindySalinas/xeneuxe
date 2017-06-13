@@ -11,6 +11,15 @@ angular.module('app.services', [])
       return defer.promise;
     };
 
+    function updateUser(data) {
+      var url = baseUrl + 'users/' + data._id;
+      var defer = $q.defer();
+      $http.put(url, data)
+        .then(function(res) { defer.resolve(res.data) })
+        .catch(function(err) { defer.reject(err.data) });
+      return defer.promise;
+    }
+
     function saveUser(data) {
       var url = baseUrl + 'users';
       var defer = $q.defer();
@@ -22,6 +31,7 @@ angular.module('app.services', [])
 
     return {
       getUsers: getUsers,
-      saveUser: saveUser
+      saveUser: saveUser,
+      updateUser: updateUser
     };
   }]);

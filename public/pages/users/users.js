@@ -40,37 +40,82 @@ angular.module('app.users', [])
 
     $scope.createUser = function(data) {
       // console.log(data);
-      ApiRequests.saveUser(data)
-        .then(function(res) {
-          console.log('res', res);
-          $scope.alert = {
-            show: true,
-            type: 'success',
-            msg: 'User successfully created'
-          };
-          $scope.userList.push(res.data);
-          $scope.user = {};
-          setTimeout(function() {
-            $scope.alert = {};
-          }, 2000);
-        })
-        .catch(function(err) {
-          console.log('err', err);
-          $scope.alert = {
-            show: true,
-            type: 'danger',
-            msg: err.message
-          };
-          setTimeout(function() {
-            $scope.alert = {};
-          }, 2000);
-        });
+      if($scope.edit){
+        ApiRequests.updateUser(data)
+          .then(function(res) {
+            console.log('res', res);
+            $scope.alert = {
+              show: true,
+              type: 'success',
+              msg: 'User successfully modified'
+            };
+            angular.forEach($scope.userList, function(value, index){
+              if(data._id === value._id){
+                $scope.userList[index] = data;
+              }
+            });
+            $scope.user = {};
+            $scope.dt = '';
+            setTimeout(function() {
+              $scope.alert = {};
+            }, 2000);
+          })
+          .catch(function(err) {
+            console.log('err', err);
+            $scope.alert = {
+              show: true,
+              type: 'danger',
+              msg: err.message
+            };
+            setTimeout(function() {
+              $scope.alert = {};
+            }, 2000);
+          });
+      }
+      else{
+        ApiRequests.saveUser(data)
+          .then(function(res) {
+            console.log('res', res);
+            $scope.alert = {
+              show: true,
+              type: 'success',
+              msg: 'User successfully created'
+            };
+            $scope.userList.push(res.data);
+            $scope.user = {};
+            setTimeout(function() {
+              $scope.alert = {};
+            }, 2000);
+          })
+          .catch(function(err) {
+            console.log('err', err);
+            $scope.alert = {
+              show: true,
+              type: 'danger',
+              msg: err.message
+            };
+            setTimeout(function() {
+              $scope.alert = {};
+            }, 2000);
+          });
+      }
     }
     $scope.editUser = function(data, index){
       $scope.edit = true;
-      $scope.user = data;
+      $scope.user = angular.copy(data);
+      if(data.birthDate){
+        $scope.dt = new Date(data.birthDate);
+        $scope.dateChange(new Date(data.birthDate));
+      }
+      else
+        $scope.dt = '';
     }
     $scope.deleteUser = function(data, index){
 
+    }
+    $scope.cancel = function(){
+      $scope.user = {};
+      $scope.dt = '';
+      $scope.edit = false;
     }
   }]);

@@ -32,7 +32,7 @@ function findUser(req, res) {
  */
 function getUsers(req, res) {
 
-  let exclude = '-password';
+  let exclude = '';
 
   req.checkQuery('lastname', 'Invalid lastname').optional().notEmpty();
   req.checkQuery('firstname', 'Invalid firstname').optional().notEmpty();
