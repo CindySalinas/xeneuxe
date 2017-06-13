@@ -139,7 +139,7 @@
           <th scope="row">{{user.accountNumber}}</th>
           <td>{{user.firstName}}</td>
           <td>{{user.lastName}}</td>
-          <td>@mdo</td>
+          <td>{{user.birthDate | date : 'yyyy-MM-dd' }}</td>
           <td>{{user.email}}</td>
           <td>{{user.membershipType}}</td>
           <td>{{user.created_at | date : 'yyyy-MM-dd' }}</td>
