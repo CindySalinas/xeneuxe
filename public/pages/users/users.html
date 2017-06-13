@@ -103,19 +103,19 @@
     <div class="col-md-4">
       <div class="form-group">
         <label for="name" class="control-label">First Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Name">
+        <input type="text" class="form-control" id="name" placeholder="Name" ng-model="nameFilter">
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label for="name" class="control-label">Lastname</label>
-        <input type="text" class="form-control" id="name" placeholder="Lastname">
+        <input type="text" class="form-control" id="name" placeholder="Lastname" ng-model="lastNameFilter">
       </div>
     </div>
     <div class="col-md-4">
       <div class="form-group">
         <label for="name" class="control-label">Email</label>
-        <input type="text" class="form-control" id="name" placeholder="Email">
+        <input type="text" class="form-control" id="name" placeholder="Email" ng-model="emailFilter">
       </div>
     </div>
   </div>
@@ -134,7 +134,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="user in userList track by $index">
+        <tr ng-repeat="user in userList | filter: { firstName: nameFilter, lastName: lastNameFilter, email: emailFilter } track by $index ">
           <th scope="row">{{user.accountNumber}}</th>
           <td>{{user.firstName}}</td>
           <td>{{user.lastName}}</td>
