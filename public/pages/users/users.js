@@ -3,6 +3,7 @@ angular.module('app.users', [])
 
     $scope.user = {};
     $scope.userList = [];
+    $scope.edit = false;
 
     $scope.dateOptions = {
       formatYear: 'yyyy',
@@ -42,5 +43,12 @@ angular.module('app.users', [])
         .catch(function(err) {
           console.log('err', err);
         });
+    }
+    $scope.editUser = function(data, index){
+      $scope.edit = true;
+      $scope.user = data;
+    }
+    $scope.deleteUser = function(data, index){
+
     }
   }]);

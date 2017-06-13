@@ -105,16 +105,21 @@
           <th>Date of Birth</th>
           <th>Email</th>
           <th>Membership type</th>
+          <th></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="user in userList">
+        <tr ng-repeat="user in userList track by $index">
           <th scope="row">{{user.accountNumber}}</th>
           <td>{{user.firstName}}</td>
           <td>{{user.lastName}}</td>
           <td>@mdo</td>
           <td>{{user.email}}</td>
           <td>{{user.membershipType}}</td>
+          <td class="text-center"><a class="user-action" ng-click="editUser(user, $index)"><i class="fa fa-edit"></i></a></td>
+          <td class="text-center"><a class="user-action" ng-click="deleteUser(user, $index)"><i class="fa fa-remove"></i></a></td>
         </tr>
       </tbody>
     </table>
