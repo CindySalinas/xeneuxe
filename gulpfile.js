@@ -45,7 +45,7 @@ gulp.task('scriptsLibs', function() {
   return gulp.src([
       './components/angular/angular.js',
       './components/angular-ui-router/release/angular-ui-router.min.js',
-      './components/angular-bootstrap/ui-bootstrap.min.js',
+      './components/angular-bootstrap/ui-bootstrap-tpls.js',
       './components/lodash/dist/lodash.min.js'
     ])
     .pipe(concat('libs.min.js'))
@@ -57,8 +57,8 @@ gulp.task('scriptsLibs', function() {
 gulp.task('libsStyle', function() {
   return gulp.src([
       './components/font-awesome/css/font-awesome.css',
-      './components/angular-bootstrap/ui-bootstrap.csp.css',
-      './components/bootstrap/dist/css/bootstrap.min.css'
+      './components/bootstrap/dist/css/bootstrap.min.css',
+      './components/angular-bootstrap/ui-bootstrap.csp.css'
     ])
     .pipe(concat('libs.min.css'))
     .pipe(minifyCss())
@@ -68,7 +68,8 @@ gulp.task('libsStyle', function() {
 /* Build fonts */
 gulp.task('fonts', function() {
   return gulp.src([
-      './components/font-awesome/fonts/*'
+      './components/font-awesome/fonts/*',
+      './components/bootstrap/dist/fonts/*'
     ])
     .pipe(gulp.dest('build/assets/fonts'));
 });
