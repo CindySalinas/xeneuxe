@@ -1,0 +1,33 @@
+{
+  "name": "xeneuxe",
+  "description": "Test",
+  "main": "server.js",
+  "authors": [
+    "cindysalinas15@gmail.com"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "angularjs",
+    "nodejs",
+    "html",
+    "css",
+    "javascript",
+    "mongodb",
+    "mongoose"
+  ],
+  "homepage": "https://github.com/CindySalinas/xeneuxe",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.6.4",
+    "angular-ui-router": "1.0.4",
+    "angular-bootstrap": "2.5.0",
+    "bootstrap": "3.3.7",
+    "font-awesome": "^4.7.0"
+  }
+}

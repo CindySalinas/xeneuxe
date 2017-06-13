@@ -1,0 +1,42 @@
+{
+  "name": "xeneuxe",
+  "version": "1.0.0",
+  "description": "Test",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp",
+    "start:prod": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CindySalinas/xeneuxe.git"
+  },
+  "keywords": [
+    "angularjs",
+    "nodejs",
+    "html",
+    "css",
+    "javascript",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "cindysalinas15@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CindySalinas/xeneuxe/issues"
+  },
+  "homepage": "https://github.com/CindySalinas/xeneuxe#readme",
+  "devDependencies": {
+    "bower": "1.8.0",
+    "gulp": "3.9.1",
+    "gulp-autoprefixer": "4.0.0",
+    "gulp-clean-css": "3.4.1",
+    "gulp-concat": "2.6.1",
+    "gulp-less": "3.3.0",
+    "gulp-minify-css": "1.2.4",
+    "gulp-nodemon": "2.2.1",
+    "gulp-rename": "1.2.2",
+    "gulp-uglify": "3.0.0"
+  }
+}
