@@ -34,15 +34,15 @@ function getUsers(req, res) {
 
   let exclude = '-password';
 
-  req.checkBody('lastname', 'Invalid lastname').notEmpty().isString();
-  req.checkBody('firstname', 'Invalid firstname').notEmpty().isString();
-  req.checkBody('email', 'Invalid email').notEmpty().isEmail();
+  req.checkQuery('lastname', 'Invalid lastname').optional().notEmpty();
+  req.checkQuery('firstname', 'Invalid firstname').optional().notEmpty();
+  req.checkQuery('email', 'Invalid email').optional().notEmpty().isEmail();
 
   let errors = req.validationErrors();
 
   if (errors)
     return res.status(400)
-              .sent({ success: false, message: 'Invalid parameters', errors: errors })
+              .send({ success: false, message: 'Invalid parameters', errors: errors })
 
   let find = {};
 
@@ -66,12 +66,12 @@ function getUsers(req, res) {
  */
 function updateUser(req, res) {
 
-  req.checkBody('lastname', 'Invalid lastname').notEmpty().isString();
-  req.checkBody('firstname', 'Invalid firstname').notEmpty().isString();
-  req.checkBody('email', 'Invalid email').notEmpty().isEmail();
-  req.checkBody('membershipType', 'Invalid Membership Type').notEmpty().isString();
-  req.checkBody('accountNumber', 'Invalid Membership Type').notEmpty();
-  req.checkBody('password', 'Invalid Membership Type').notEmpty().isString();
+  req.checkBody('lastname', 'Invalid lastname').optional().notEmpty();
+  req.checkBody('firstname', 'Invalid firstname').optional().notEmpty();
+  req.checkBody('email', 'Invalid email').optional().notEmpty().isEmail();
+  req.checkBody('membershipType', 'Invalid Membership Type').optional().notEmpty();
+  req.checkBody('accountNumber', 'Invalid Membership Type').optional().notEmpty();
+  req.checkBody('password', 'Invalid Membership Type').optional().notEmpty();
 
   req.checkParams('userId', 'Invalid user').notEmpty();
 
