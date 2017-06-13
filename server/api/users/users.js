@@ -96,23 +96,23 @@ function updateUser(req, res) {
  */
 function createUser(req, res) {
 
-  req.checkBody('lastname', 'Invalid lastname').notEmpty().isString();
-  req.checkBody('firstname', 'Invalid firstname').notEmpty().isString();
+  req.checkBody('lastName', 'Invalid lastname').notEmpty();
+  req.checkBody('firstName', 'Invalid firstname').notEmpty();
   req.checkBody('email', 'Invalid email').notEmpty().isEmail();
-  req.checkBody('membershipType', 'Invalid Membership Type').notEmpty().isString();
+  req.checkBody('membershipType', 'Invalid Membership Type').notEmpty();
   req.checkBody('accountNumber', 'Invalid Membership Type').notEmpty();
-  req.checkBody('password', 'Invalid Membership Type').notEmpty().isString();
+  req.checkBody('password', 'Invalid Membership Type').notEmpty();
 
   let errors = req.validationErrors();
 
   if (errors)
     return res.status(400)
-              .sent({ success: false, message: 'Invalid parameters', errors: errors });
+              .send({ success: false, message: 'Invalid parameters', errors: errors });
 
   let data = req.body;
 
   User.create(data, (err, user) => {
-    if (err) return res.status(500).send({ success: false, message: 'Internal Error', error: err });
+    if (err) return res.status(500).send({ success: false, message: 'Email already exists', error: err });
     return res.status(201).send({ success: true, data: user });
   });
 }
