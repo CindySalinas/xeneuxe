@@ -94,7 +94,7 @@ gulp.task('index', function() {
 
 /* Watch files */
 gulp.task('watch', function() {
-  gulp.watch(['public/**/*'], ['build']);
+  gulp.watch(['public/**/**/*'], ['build']);
 });
 
 /* Build task */
