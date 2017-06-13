@@ -7,6 +7,7 @@ var nodemon = require('gulp-nodemon'),
     rename = require('gulp-rename'),
     minifyCss = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
+    flatten = require('gulp-flatten'),
     concat = require('gulp-concat');
 
 /* Clean task*/
@@ -74,7 +75,8 @@ gulp.task('fonts', function() {
 
 /* Build Templates */
 gulp.task('templates', function() {
-  return gulp.src('public/modules/**/*.html')
+  return gulp.src(['./public/**/**/*.html', '!./public/index.html'])
+    .pipe(flatten({ includeParents: -1} ))
     .pipe(gulp.dest('build/templates/'))
 });
 
